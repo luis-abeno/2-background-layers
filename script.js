@@ -5,6 +5,7 @@ const CANVAS_WIDTH = (canvas.width = 800);
 const CANVAS_HEIGHT = (canvas.height = 700);
 
 let gameSpeed = 15;
+let gameFrame = 0;
 
 const backgroundLayer1 = new Image();
 backgroundLayer1.src = "./background-layers/layer-1.png";
@@ -45,12 +46,7 @@ class Layer {
 
   update() {
     this.speed = gameSpeed * this.speedModifier;
-
-    if (this.x <= -this.width) {
-      this.x = 0;
-    }
-
-    this.x = Math.floor(this.x - this.speed);
+    this.x = (gameFrame * this.speed) % this.width;
   }
 
   draw() {
@@ -74,7 +70,7 @@ const animate = () => {
     object.update();
     object.draw();
   });
-
+  gameFrame--;
   requestAnimationFrame(animate);
 };
 
