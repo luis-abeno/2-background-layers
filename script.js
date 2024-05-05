@@ -46,7 +46,10 @@ class Layer {
 
   update() {
     this.speed = gameSpeed * this.speedModifier;
-    this.x = (gameFrame * this.speed) % this.width;
+    this.x -= this.speed;
+    if (this.x < -this.width) {
+      this.x = 0;
+    }
   }
 
   draw() {
